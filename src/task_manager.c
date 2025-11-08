@@ -1,35 +1,24 @@
-/**
- * @file task_manager.c
- * @brief Task Management Implementation
- * @author Team Member 1 - Task Management
- * @date 2024
- * 
- * This module implements task creation and state management for the scheduler.
- */
+
+
+ 
+  //This module implements task creation and state management for the scheduler.
+ 
 
 #include "task_manager.h"
 #include "memory_manager.h"
 #include "scheduler.h"
 
-/* ============================================================================
- * GLOBAL VARIABLES
- * ============================================================================ */
+
+ // GLOBAL VARIABLES
+
 static tcb_t task_table[MAX_TASKS];
 static uint8_t task_count = 0;
 static uint8_t current_task_id = 0xFF;
 
-/* ============================================================================
- * PRIVATE FUNCTION PROTOTYPES
- * ============================================================================ */
+
+ //PRIVATE FUNCTION PROTOTYPES
 static uint8_t task_get_free_id(void);
-
-/* ============================================================================
- * PUBLIC FUNCTIONS
- * ============================================================================ */
-
-/**
- * @brief Initialize the task manager
- */
+ // PUBLIC FUNCTIONS
 rtos_result_t task_manager_init(void)
 {
     memset(task_table, 0, sizeof(task_table));
@@ -46,9 +35,7 @@ rtos_result_t task_manager_init(void)
     return RTOS_SUCCESS;
 }
 
-/**
- * @brief Create a new task
- */
+ // Create a new task
 uint8_t task_create(void (*task_function)(void), 
                    const char* task_name, 
                    uint32_t stack_size)
@@ -57,18 +44,15 @@ uint8_t task_create(void (*task_function)(void),
     {
         return 0xFF;
     }
-    
     if(stack_size < MIN_STACK_SIZE || task_count >= MAX_TASKS)
     {
         return 0xFF;
     }
-    
     uint8_t task_id = task_get_free_id();
     if(task_id == 0xFF)
     {
         return 0xFF;
     }
-    
     tcb_t* tcb = &task_table[task_id];
     
     /* Allocate stack memory */
@@ -77,7 +61,6 @@ uint8_t task_create(void (*task_function)(void),
     {
         return 0xFF;
     }
-    
     /* Initialize TCB */
     tcb->task_id = task_id;
     strncpy(tcb->task_name, task_name, MAX_TASK_NAME_LENGTH - 1);
@@ -96,9 +79,8 @@ uint8_t task_create(void (*task_function)(void),
     return task_id;
 }
 
-/**
- * @brief Get task control block by ID
- */
+ // Get task control block by ID
+ 
 tcb_t* task_get_tcb(uint8_t task_id)
 {
     if(task_id >= MAX_TASKS)
@@ -114,9 +96,8 @@ tcb_t* task_get_tcb(uint8_t task_id)
     return &task_table[task_id];
 }
 
-/**
- * @brief Get current running task
- */
+  //Get current running task
+ 
 tcb_t* task_get_current(void)
 {
     if(current_task_id == 0xFF)
@@ -127,9 +108,8 @@ tcb_t* task_get_current(void)
     return &task_table[current_task_id];
 }
 
-/**
- * @brief Set task state
- */
+// Set task state
+ 
 rtos_result_t task_set_state(uint8_t task_id, task_state_t new_state)
 {
     if(task_id >= MAX_TASKS)
@@ -153,22 +133,16 @@ rtos_result_t task_set_state(uint8_t task_id, task_state_t new_state)
     
     return RTOS_SUCCESS;
 }
-
-/**
- * @brief Get number of active tasks
- */
+ //Get number of active tasks
+ 
 uint8_t task_get_count(void)
 {
     return task_count;
 }
 
-/* ============================================================================
- * PRIVATE FUNCTIONS
- * ============================================================================ */
-
-/**
- * @brief Get next available task ID
- */
+ // PRIVATE FUNCTIONS
+// Get next available task ID
+ 
 static uint8_t task_get_free_id(void)
 {
     for(uint8_t i = 0; i < MAX_TASKS; i++)
