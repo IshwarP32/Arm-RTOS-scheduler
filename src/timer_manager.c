@@ -1,24 +1,16 @@
 /**
- * @file timer_manager.c
- * @brief Timer and Interrupt Management Implementation
  * @author Team Member 5 - Timer/Interrupt Management
- * @date 2024
- * 
- * This module handles hardware timer (SysTick) configuration and timing utilities
- * for the RTOS scheduler.
+ * This module handles hardware timer (SysTick) configuration and timing utilities for the RTOS scheduler.
  */
 
 #include "timer_manager.h"
 #include "arm_cortex_m.h"
 
-/* ============================================================================
- * PUBLIC FUNCTIONS - TIMING UTILITIES
- * ============================================================================ */
-
 /**
- * @brief Calculate SysTick reload value for given time slice in milliseconds
+ * Calculate SysTick reload value for given time slice in milliseconds
  * @param time_slice_ms Time slice duration in milliseconds
  * @return uint32_t SysTick reload value (clamped to 24-bit range)
+ * This is general
  */
 uint32_t timer_calculate_slice_ticks(uint32_t time_slice_ms)
 {
@@ -36,8 +28,9 @@ uint32_t timer_calculate_slice_ticks(uint32_t time_slice_ms)
 }
 
 /**
- * @brief Start SysTick timer with given reload value (polling mode)
+ * Start SysTick timer with given reload value (polling mode)
  * @param reload_ticks Reload value for SysTick counter
+ * This is CortexM3
  */
 void timer_start_slice(uint32_t reload_ticks)
 {
@@ -48,7 +41,8 @@ void timer_start_slice(uint32_t reload_ticks)
 }
 
 /**
- * @brief Stop SysTick timer
+ * Stop SysTick timer
+ * This is CortexM3
  */
 void timer_stop_slice(void)
 {
@@ -56,10 +50,12 @@ void timer_stop_slice(void)
 }
 
 /**
- * @brief Check if current time slice has expired
+ * Check if current time slice has expired
  * @return bool True if slice expired (COUNTFLAG set)
+ * This is CortexM3
  */
 bool timer_slice_expired(void)
 {
     return ((SYSTICK_CTRL_REG & SYSTICK_COUNTFLAG) != 0);
 }
+
