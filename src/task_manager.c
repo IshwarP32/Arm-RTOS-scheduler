@@ -1,13 +1,9 @@
 
-
- 
   //This module implements task creation and state management for the scheduler.
  
-
 #include "task_manager.h"
 #include "memory_manager.h"
 #include "scheduler.h"
-
 
  // GLOBAL VARIABLES
 
@@ -17,8 +13,10 @@ static uint8_t current_task_id = 0xFF;
 
 
  //PRIVATE FUNCTION PROTOTYPES
+
 static uint8_t task_get_free_id(void);
  // PUBLIC FUNCTIONS
+
 rtos_result_t task_manager_init(void)
 {
     memset(task_table, 0, sizeof(task_table));
@@ -61,6 +59,7 @@ uint8_t task_create(void (*task_function)(void),
     {
         return 0xFF;
     }
+ 
     /* Initialize TCB */
     tcb->task_id = task_id;
     strncpy(tcb->task_name, task_name, MAX_TASK_NAME_LENGTH - 1);
