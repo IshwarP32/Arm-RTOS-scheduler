@@ -1,13 +1,3 @@
-/**
- * @file queue_manager.c
- * @brief Queue Management Implementation
- * @author Team Member  3 - Queue/Semaphore Management
- * @date 2024
- * 
- * This module implements simple circular buffer message queues for
- * inter-task communication (not used in current demo but available).
- */
-
 #include "queue_manager.h"
 #include <string.h>
 
