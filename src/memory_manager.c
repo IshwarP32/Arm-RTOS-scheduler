@@ -1,13 +1,3 @@
-/**
- * @file memory_manager.c
- * @brief Memory Management Implementation
- * @author Team Member 4 - Memory Management
- * @date 2024
- * 
- * This module implements dynamic memory allocation using a first-fit algorithm
- * with coalescing of adjacent free blocks for task stack allocation.
- */
-
 #include "memory_manager.h"
 #include "rtos_config.h"
 #include "arm_cortex_m.h"
@@ -266,3 +256,4 @@ static void memory_coalesce_blocks(void)
         current = current->next;
     }
 }
+
