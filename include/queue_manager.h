@@ -1,12 +1,3 @@
-/**
- * @file queue_manager.h
- * @brief Queue and Semaphore Management Interface
- * @author Team Member 3 - Queue/Semaphore Management
- * @date 2024
- * 
- * This module implements simple message queues for inter-task communication.
- */
-
 #ifndef QUEUE_MANAGER_H
 #define QUEUE_MANAGER_H
 
