@@ -1,12 +1,3 @@
-/**
- * @file memory_manager.h
- * @brief Memory Management Interface
- * @author Team Member 4 - Memory Management
- * @date 2024
- * 
- * This module implements dynamic memory allocation for task stack allocation.
- */
-
 #ifndef MEMORY_MANAGER_H
 #define MEMORY_MANAGER_H
 
@@ -50,3 +41,4 @@ void* memory_alloc(uint32_t size);
 rtos_result_t memory_free(void* ptr);
 
 #endif /* MEMORY_MANAGER_H */
+
